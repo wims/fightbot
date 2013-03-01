@@ -2197,13 +2197,12 @@ proc best {unick host handle dest text} {
 				set oldRank $rank
 			}
 			if {$nick == $unick} { set userRank $rank }
-			if {$counter>$offset} {
+			if {$counter>$offset && $reachedLimit<1} {
 				send $unick $dest [format "# %-4d %-12s %-6d %-6d" $rank $nick $wins $losses]
 			}
 		}
 		if {$counter==[expr $limit + $offset]} {
 			set reachedLimit 1
-			break
 		}
 	}
 	if {$userRank} {
